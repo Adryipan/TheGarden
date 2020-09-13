@@ -26,7 +26,7 @@ class PlantData: NSObject, Decodable{
     required init(from decoder: Decoder) throws{
         let plantContainer = try decoder.container(keyedBy: RootKeys.self)
         
-        commonName = try plantContainer.decode(String.self, forKey: .commonName)
+        commonName = try plantContainer.decode(String?.self, forKey: .commonName)
         scienceName = try plantContainer.decode(String.self, forKey: .scienceName)
         family = try plantContainer.decode(String.self, forKey: .family)
         yearDiscovered = try plantContainer.decode(Int.self, forKey: .yearDiscovered)

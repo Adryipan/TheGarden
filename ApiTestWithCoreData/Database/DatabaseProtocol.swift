@@ -30,6 +30,7 @@ protocol DatabaseListener: AnyObject {
 
 protocol DatabaseProtocol: AnyObject {
     func getExhibition(name: String) -> Exhibition
+    func getExhibitionPlants(exhibitionName: String) -> [Plant]
     func configureTemp()
     func updateExhibition(exhibition: Exhibition, newDesc: String)
     func addPlant(plantData: PlantData) -> Plant

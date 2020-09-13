@@ -31,6 +31,7 @@
 		3AE743B1250DE527009C0E4E /* CurrentExhibitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743B0250DE527009C0E4E /* CurrentExhibitionViewController.swift */; };
 		3AE743B3250E0CA7009C0E4E /* EditExhibitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743B2250E0CA7009C0E4E /* EditExhibitionViewController.swift */; };
 		3AF01A00250E30EF009E747F /* CreateExhibitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */; };
+		3AF01A02250E72E0009E747F /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A01250E72E0009E747F /* EditPlantViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		3AE743B0250DE527009C0E4E /* CurrentExhibitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExhibitionViewController.swift; sourceTree = "<group>"; };
 		3AE743B2250E0CA7009C0E4E /* EditExhibitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExhibitionViewController.swift; sourceTree = "<group>"; };
 		3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExhibitionViewController.swift; sourceTree = "<group>"; };
+		3AF01A01250E72E0009E747F /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				3AE743B0250DE527009C0E4E /* CurrentExhibitionViewController.swift */,
 				3AE743B2250E0CA7009C0E4E /* EditExhibitionViewController.swift */,
 				3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */,
+				3AF01A01250E72E0009E747F /* EditPlantViewController.swift */,
 			);
 			path = ApiTestWithCoreData;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				3AE743AF250D1E9E009C0E4E /* AllExhibitionTableViewController.swift in Sources */,
 				3AE7437C250CE88B009C0E4E /* SceneDelegate.swift in Sources */,
 				3AE743A3250CEE83009C0E4E /* SearchPlantsTableViewController.swift in Sources */,
+				3AF01A02250E72E0009E747F /* EditPlantViewController.swift in Sources */,
 				3AE743A6250CF5B6009C0E4E /* Exhibition+CoreDataClass.swift in Sources */,
 				3AF01A00250E30EF009E747F /* CreateExhibitionViewController.swift in Sources */,
 				3AE74394250CE936009C0E4E /* Plant+CoreDataClass.swift in Sources */,

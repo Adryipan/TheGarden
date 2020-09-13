@@ -67,12 +67,12 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
             exhibition = (exhibitionFetchedResultsController.fetchedObjects)!
             if exhibition.count > 0{
                 removeExhibition(exhibition: exhibition[0])
-                addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
+                let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
             } else {
-                addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
+                let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
             }
          } else{
-            addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
+            let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
         }
 
     }
@@ -175,6 +175,33 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         plant.year = String(year)
 
         return plant
+    }
+    
+    func getExhibitionPlants(exhibitionName: String) -> [Plant] {
+        if exhibitionPlantsFetchedResultsController == nil{
+        let fetchRequest: NSFetchRequest<Plant> = Plant.fetchRequest()
+        let nameSortDescriptor = NSSortDescriptor(key: "commonName", ascending: true)
+        fetchRequest.sortDescriptors = [nameSortDescriptor]
+        let predicate = NSPredicate(format: "ANY exhibitions.name == %@", exhibitionName)
+        fetchRequest.predicate = predicate
+        
+        exhibitionPlantsFetchedResultsController = NSFetchedResultsController<Plant>(fetchRequest: fetchRequest, managedObjectContext: persistantContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+            exhibitionPlantsFetchedResultsController?.delegate = self
+
+            do {
+               try exhibitionPlantsFetchedResultsController?.performFetch()
+            } catch {
+               print("Fetch Request Failed: \(error)")
+            }
+        }
+
+        var plants = [Plant]()
+
+        if exhibitionPlantsFetchedResultsController?.fetchedObjects != nil {
+           plants = (exhibitionPlantsFetchedResultsController?.fetchedObjects)!
+        }
+
+        return plants
     }
 
     // MARK: - Fetched Results Controller Protocol Functions
@@ -309,9 +336,18 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         
         let bambooExhibition = addExhibition(name: "Bamboo Collection", desc: "Taxonomic and Evolutionary collection of Bamboo.", lat: -37.830422, long: 144.980248)
         let bamboo1 = addPlant(commonName: "black bamboo", scientificName: "Phyllostachys nigra", image_url: "https://bs.floristic.org/image/o/45e7e42c5f9b0a9ec324b9fba3abf970bcfe8ded", family: "Poaceae", year: 1868)
+        let bamboo2 = addPlant(commonName: "sacred bamboo", scientificName: "Nandina domestica", image_url: "https://bs.floristic.org/image/o/c9ee505a8e9c3ff960972c9753e6b2b10f10e0f3", family: "Berberidaceae", year: 1781)
+        let bamboo3 = addPlant(commonName: "Castillon bamboo", scientificName: "Phyllostachys reticulata", image_url: "https://bs.floristic.org/image/o/0dc03f60b8ebf21c0105f234b8b692ee2b5f039e", family: "Poaceae", year: 1873)
+        
+        bambooExhibition.addToPlants([bamboo1, bamboo2, bamboo3])
         
         
-        let _ = addExhibition(name: "Camellia Collection", desc: "A breathtaking best exhibition in winter.", lat: -37.830997, long: 144.979243)
+        let camelliaCollection = addExhibition(name: "Camellia Collection", desc: "A breathtaking best exhibition in winter.", lat: -37.830997, long: 144.979243)
+        let camellia1 = addPlant(commonName: "Yellow camellia", scientificName: "Camellia petelotii", image_url: "https://bs.floristic.org/image/o/e8f2b963c47a310a19366dcb473efc27e0d22ea8", family: "Theaceae", year: 1949)
+        let camellia2 = addPlant(commonName: "camellia", scientificName: "Camellia japonica", image_url: "https://bs.floristic.org/image/o/d581db1f72706fdf81c8e34a239f478077ea8cb4", family: "Theaceae", year: 1753)
+        let camellia3 = addPlant(commonName: "Tea-oil-plant", scientificName: "Camellia oleifera", image_url: "https://bs.floristic.org/image/o/d706dd156d80626b4d40de3b730d8f1193caca90", family: "Theaceae", year: 1818)
+        
+        camelliaCollection.addToPlants([camellia1, camellia2, camellia3])
     }
     
 

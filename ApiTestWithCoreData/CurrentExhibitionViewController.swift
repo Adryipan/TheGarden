@@ -16,6 +16,7 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
     weak var databaseController: DatabaseProtocol?
     
     var currentExhibition: Exhibition!
+    var selectedPlant: Plant?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -25,7 +26,10 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
     var currentLocation: CLLocationCoordinate2D?
     var exhibitionLocation: CLLocationCoordinate2D?
     
-
+    @IBOutlet weak var plantTableView: UITableView!
+    var addedPlantList: [Plant] = []
+    let CELL_PLANT = "plantCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,10 +49,15 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
         if authorisationStatus != .authorizedAlways || authorisationStatus != .authorizedWhenInUse{
             locationManager.requestWhenInUseAuthorization()
         }
+        addedPlantList = databaseController?.getExhibitionPlants(exhibitionName: currentExhibition.name!) as! [Plant]
+        print(addedPlantList.count)
         
         // Do any additional setup after loading the view.
         nameLabel.text = currentExhibition?.name
         descriptionLabel.text = currentExhibition?.desc
+        
+        plantTableView.delegate = self
+        plantTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +87,7 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
         currentExhibition = databaseController?.getExhibition(name: currentExhibition.name!)
         nameLabel.text = currentExhibition?.name
         descriptionLabel.text = currentExhibition?.desc
+        addedPlantList = (currentExhibition.plants)?.allObjects as! [Plant]
     }
     
     // MARK: - CLLocationManager delegate
@@ -103,8 +113,36 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
         if segue.identifier == "editExhibitionSegue"{
             let destination = segue.destination as! EditExhibitionViewController
             destination.currentExhibition = currentExhibition
+        } else if segue.identifier == "editPlantSegue"{
+            let destination = segue.destination as! EditPlantViewController
+            destination.currentPlant = selectedPlant
         }
     }
     
 
+}
+
+// MARK: - TableView delegates
+extension CurrentExhibitionViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return addedPlantList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let addedPlantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT, for: indexPath)
+        
+        let addedPlant = addedPlantList[indexPath.row]
+        
+        addedPlantCell.textLabel?.text = addedPlant.commonName
+        addedPlantCell.detailTextLabel?.text = addedPlant.scientificName
+        
+        return addedPlantCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedPlant = addedPlantList[indexPath.row]
+        performSegue(withIdentifier: "editPlantSegue", sender: nil)
+    }
+    
+    
 }
