@@ -2,7 +2,7 @@
 //  Plant+CoreDataProperties.swift
 //  ApiTestWithCoreData
 //
-//  Created by Adrian Yip on 12/9/20.
+//  Created by Adrian Yip on 15/9/20.
 //  Copyright © 2020 Monash University. All rights reserved.
 //
 //
@@ -18,10 +18,11 @@ extension Plant {
     }
 
     @NSManaged public var commonName: String?
-    @NSManaged public var scientificName: String?
     @NSManaged public var family: String?
-    @NSManaged public var image_url: String?
+    @NSManaged public var image: Data?
+    @NSManaged public var scientificName: String?
     @NSManaged public var year: String?
+    @NSManaged public var image_url: String?
     @NSManaged public var exhibitions: NSSet?
 
 }

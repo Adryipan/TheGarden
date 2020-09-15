@@ -38,6 +38,10 @@ class CreateExhibitionViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
+        // TextField delegate
+        nameTextField.delegate = self
+        descriptionTextField.delegate = self
+        
         // Do any additional setup after loading the view.
         mapView.delegate = self
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
@@ -52,6 +56,7 @@ class CreateExhibitionViewController: UIViewController {
         
         tempExhibition = databaseController?.getExhibition(name: "Temp")
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -81,14 +86,50 @@ class CreateExhibitionViewController: UIViewController {
         // Register the coordinate for saving
         lat = location.latitude
         long = location.longitude
-        print(lat!)
-        print(long!)
         annotation.title = "New Exhibition"
         annotation.subtitle = ""
         self.mapView.addAnnotation(annotation)
     }
     
+    @IBAction func save(_ sender: Any) {
+        
+        if nameTextField.text != "" && descriptionTextField.text != "" && lat != nil && long != nil && addedPlantList.count >= 3{
+            let name = nameTextField.text!
+            let description = descriptionTextField.text!
+            
+            let newExhibition = databaseController?.addExhibition(name: name, desc: description, lat: lat!, long: long!)
+            
+            for thisPlant in addedPlantList{
+                newExhibition?.addToPlants(thisPlant)
+            }
 
+            navigationController?.popViewController(animated: true)
+            return
+        }
+    
+        var errorMsg = "Please make sure all fields are filled:\n"
+        if nameTextField.text == ""{
+            errorMsg += "- Name must not be empty\n"
+        }
+        if descriptionTextField.text == ""{
+            errorMsg += "- Description of must not be empty\n"
+        }
+        if lat == nil || long == nil{
+            errorMsg += "- Please pin the location\n"
+        }
+        if addedPlantList.count < 3{
+            errorMsg += "- Please add 3 or more plants"
+        }
+        
+        displayMessage(title: "Please provide more details", message: errorMsg)
+    }
+    
+    func displayMessage(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
     /*
     // MARK: - Navigation
@@ -162,4 +203,17 @@ extension CreateExhibitionViewController: DatabaseListener{
     }
     
     
+}
+
+// MARK: - TextField delegate
+extension CreateExhibitionViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

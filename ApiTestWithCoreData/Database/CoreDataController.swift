@@ -11,6 +11,8 @@ import CoreData
 
 class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsControllerDelegate{
 
+    
+
     var listeners = MulticastDelegate<DatabaseListener>()
     var persistantContainer: NSPersistentContainer
     
@@ -43,6 +45,36 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     }
     
     // MARK: - Database Protocol Implementation
+    
+    func checkExhibition(name: String) -> Bool {
+        let fetchRequest: NSFetchRequest<Exhibition> = Exhibition.fetchRequest()
+        let predicate = NSPredicate(format: "name == %@", "Temp")
+        fetchRequest.predicate = predicate
+        let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [nameSortDescriptor]
+
+        let exhibitionFetchedResultsController = NSFetchedResultsController<Exhibition>(fetchRequest: fetchRequest, managedObjectContext: persistantContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        exhibitionFetchedResultsController.delegate = self
+
+        do {
+            try exhibitionFetchedResultsController.performFetch()
+        } catch {
+            print("Fetch Request Failed: \(error)")
+        }
+         
+
+         var exhibition = [Exhibition]()
+
+         if exhibitionFetchedResultsController.fetchedObjects != nil {
+            exhibition = (exhibitionFetchedResultsController.fetchedObjects)!
+        }
+        
+        if exhibition.count == 0{
+            return false
+        } else {
+            return true
+        }
+    }
     
     func configureTemp(){
         let fetchRequest: NSFetchRequest<Exhibition> = Exhibition.fetchRequest()
@@ -107,17 +139,28 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         exhibition.setValue(newDesc, forKey: "desc")
     }
     
-    
-    func addPlant(plantData: PlantData) -> Plant {
+    func addPlant(plantData: PlantData, image: Data) -> Plant {
         let plant = NSEntityDescription.insertNewObject(forEntityName: "Plant", into: persistantContainer.viewContext) as! Plant
         plant.commonName = plantData.commonName
         plant.scientificName = plantData.scienceName
         plant.image_url = plantData.image_url
         plant.family = plantData.family
         plant.year = String(plantData.yearDiscovered!)
-
+        plant.image = image
+        
         return plant
-     }
+    }
+    
+//    func addPlant(plantData: PlantData) -> Plant {
+//        let plant = NSEntityDescription.insertNewObject(forEntityName: "Plant", into: persistantContainer.viewContext) as! Plant
+//        plant.commonName = plantData.commonName
+//        plant.scientificName = plantData.scienceName
+//        plant.image_url = plantData.image_url
+//        plant.family = plantData.family
+//        plant.year = String(plantData.yearDiscovered!)
+//
+//        return plant
+//     }
     
     func addExhibition(name: String, desc: String, lat: Double, long: Double) -> Exhibition{
         let exhibition = NSEntityDescription.insertNewObject(forEntityName: "Exhibition", into: persistantContainer.viewContext) as! Exhibition

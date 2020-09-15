@@ -27,12 +27,16 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
+        
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
+        if (databaseController?.checkExhibition(name: "Temp"))!{
+            databaseController?.removeExhibition(exhibition: (databaseController?.getExhibition(name: "Temp"))!)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -146,4 +150,26 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
    }
     
 
+}
+
+extension AllExhibitionTableViewController: AddExhibitionDelegate{
+    func addExhibitionDelegate(newExhibition: Exhibition) -> Bool {
+        
+        if (databaseController?.getExhibition(name: newExhibition.name!))!.name == "Temp" {
+            return false
+        }
+        
+        
+        let addedPlantList = databaseController?.getExhibitionPlants(exhibitionName: "Temp")
+        if addedPlantList?.count == 0{
+            return false
+        }
+        
+        let temp = databaseController?.getExhibition(name: "Temp")
+        
+        newExhibition.addToPlants((temp?.plants)!)
+        return true
+    }
+    
+    
 }

@@ -9,14 +9,14 @@
 import UIKit
 
 class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegate {
-
-
+    
     let PLANT_CELL = "plantCell"
     let API_KEY = "FYTiGTebvmXvhD_V4n4C8T8W0N_OnI2tA2bRlia0N-A"
     let REQUEST_STRING = "https://trefle.io/api/v1/plants/search?token="
     
     var indicator = UIActivityIndicatorView()
     var newPlants = [PlantData]()
+    var newPlantImage = [UIImage]()
     weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
@@ -48,16 +48,18 @@ class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegat
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PLANT_CELL,for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PLANT_CELL,for: indexPath) as! PlantTableViewCell
         let plant = newPlants[indexPath.row]
-
-        cell.textLabel?.text = plant.commonName
-        cell.detailTextLabel?.text = plant.scienceName
+        
+        cell.commonNameLabel.text = plant.commonName
+        cell.scienceNameLabel.text = plant.scienceName
+        cell.imageView?.loadImage(url: plant.image_url!)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let plant = newPlants[indexPath.row]
+        let imageData = UIImageView.loadImage(url:plant.image_url!)
         let _ = databaseController?.addPlant(plantData: plant)
         navigationController?.popViewController(animated: true)
     }
@@ -104,7 +106,6 @@ class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegat
             let searchResult = try decoder.decode(SearchResultData.self, from: data!)
             if let plants = searchResult.plants {
                 self.newPlants.append(contentsOf: plants)
-
         DispatchQueue.main.async {
             self.tableView.reloadData()
                 }
@@ -116,3 +117,5 @@ class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegat
         task.resume()
     }
 }
+
+

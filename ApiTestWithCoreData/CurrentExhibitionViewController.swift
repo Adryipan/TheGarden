@@ -50,7 +50,6 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
             locationManager.requestWhenInUseAuthorization()
         }
         addedPlantList = databaseController?.getExhibitionPlants(exhibitionName: currentExhibition.name!) as! [Plant]
-        print(addedPlantList.count)
         
         // Do any additional setup after loading the view.
         nameLabel.text = currentExhibition?.name

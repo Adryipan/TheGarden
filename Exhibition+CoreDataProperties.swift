@@ -2,7 +2,7 @@
 //  Exhibition+CoreDataProperties.swift
 //  ApiTestWithCoreData
 //
-//  Created by Adrian Yip on 12/9/20.
+//  Created by Adrian Yip on 15/9/20.
 //  Copyright © 2020 Monash University. All rights reserved.
 //
 //
@@ -17,10 +17,10 @@ extension Exhibition {
         return NSFetchRequest<Exhibition>(entityName: "Exhibition")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var desc: String?
     @NSManaged public var lat: Double
     @NSManaged public var long: Double
+    @NSManaged public var name: String?
     @NSManaged public var plants: NSSet?
 
 }
