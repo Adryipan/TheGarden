@@ -16,6 +16,7 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
     let CELL_INFO = "exhibitionSizeCell"
     
     var allExhibitionList: [Exhibition] = []
+    var filteredExhibitionList: [Exhibition] = []
     weak var databaseController: DatabaseProtocol?
     var listenerType: ListenerType = .exhibitions
     
@@ -27,6 +28,15 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
+        
+        // Setup the search controller delegate and view
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Plants"
+        navigationItem.searchController = searchController
+        
+        definesPresentationContext = true
         
 
     }
@@ -171,5 +181,29 @@ extension AllExhibitionTableViewController: AddExhibitionDelegate{
         return true
     }
     
+}
+
+// MARK: - Search Controller Delegate
+extension AllExhibitionTableViewController: UISearchResultsUpdating{
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else{
+            return
+        }
+        
+        if searchText.count > 0{
+            filteredExhibitionList = allExhibitionList.filter({(exhibition: Exhibition) -> Bool in
+                guard let exhibitionName = exhibition.name else{
+                    return false
+                }
+                
+                return exhibitionName.contains(searchText)
+            })
+        } else {
+            filteredExhibitionList = allExhibitionList
+        }
+        
+        tableView.reloadData()
+    }
     
 }

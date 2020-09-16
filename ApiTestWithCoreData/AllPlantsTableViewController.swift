@@ -80,14 +80,16 @@ class AllPlantsTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == SECTION_PLANT{
-            let plantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT, for: indexPath)
-
-            let plant = filteredPlants[indexPath.row]
-            
-            plantCell.textLabel?.text = plant.commonName
-            plantCell.detailTextLabel?.text = plant.scientificName
-            
-
+             let plantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT,for: indexPath) as! PlantTableViewCell
+                   let plant = filteredPlants[indexPath.row]
+                   
+                   plantCell.commonNameLabel.text = plant.commonName
+            plantCell.scienceNameLabel.text = plant.scientificName
+            if plant.image != nil{
+                plantCell.imageView?.image = UIImage(data: plant.image!)
+            } else {
+                plantCell.imageView?.image = UIImage(named: "tree")
+            }
             return plantCell
         }
         
@@ -100,8 +102,7 @@ class AllPlantsTableViewController: UITableViewController{
         cell.selectionStyle = .none
         return cell
         
-    }
-    
+    }    
 }
 
 // MARK: - Database Listener

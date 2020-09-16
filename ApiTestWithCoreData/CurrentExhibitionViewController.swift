@@ -12,7 +12,7 @@ import CoreLocation
 
 class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelegate, DatabaseListener{
 
-    var listenerType: ListenerType = .exhibitions
+    var listenerType: ListenerType = .all
     weak var databaseController: DatabaseProtocol?
     
     var currentExhibition: Exhibition!
@@ -49,7 +49,9 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
         if authorisationStatus != .authorizedAlways || authorisationStatus != .authorizedWhenInUse{
             locationManager.requestWhenInUseAuthorization()
         }
-        addedPlantList = databaseController?.getExhibitionPlants(exhibitionName: currentExhibition.name!) as! [Plant]
+        
+        addedPlantList = (databaseController?.getExhibitionPlants(exhibitionName: currentExhibition.name!))! as [Plant]
+        
         
         // Do any additional setup after loading the view.
         nameLabel.text = currentExhibition?.name
@@ -78,7 +80,7 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
     }
     
     func onPlantsRecordChange(change: DatabaseChange, plants: [Plant]) {
-        // Not Called
+        // Not called
     }
     
     func onExhibitionRecordChange(change: DatabaseChange, exhibitions: [Exhibition]) {
@@ -112,8 +114,8 @@ class CurrentExhibitionViewController: UIViewController, CLLocationManagerDelega
         if segue.identifier == "editExhibitionSegue"{
             let destination = segue.destination as! EditExhibitionViewController
             destination.currentExhibition = currentExhibition
-        } else if segue.identifier == "editPlantSegue"{
-            let destination = segue.destination as! EditPlantViewController
+        } else if segue.identifier == "viewPlantSegue"{
+            let destination = segue.destination as! CurrentPlantViewController
             destination.currentPlant = selectedPlant
         }
     }
@@ -128,19 +130,21 @@ extension CurrentExhibitionViewController: UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let addedPlantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT, for: indexPath)
+        let addedPlantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT, for: indexPath) as! PlantTableViewCell
         
         let addedPlant = addedPlantList[indexPath.row]
         
-        addedPlantCell.textLabel?.text = addedPlant.commonName
-        addedPlantCell.detailTextLabel?.text = addedPlant.scientificName
+        addedPlantCell.commonNameLabel.text = addedPlant.commonName
+        addedPlantCell.scienceNameLabel?.text = addedPlant.scientificName
+        addedPlantCell.imageView?.image = UIImage(data: addedPlant.image!)
+        
         
         return addedPlantCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPlant = addedPlantList[indexPath.row]
-        performSegue(withIdentifier: "editPlantSegue", sender: nil)
+        performSegue(withIdentifier: "viewPlantSegue", sender: nil)
     }
     
     

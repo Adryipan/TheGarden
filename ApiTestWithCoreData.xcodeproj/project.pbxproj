@@ -24,7 +24,6 @@
 		3AE743A3250CEE83009C0E4E /* SearchPlantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743A2250CEE83009C0E4E /* SearchPlantsTableViewController.swift */; };
 		3AE743A6250CF5B6009C0E4E /* Exhibition+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743A4250CF5B6009C0E4E /* Exhibition+CoreDataClass.swift */; };
 		3AE743A7250CF5B6009C0E4E /* Exhibition+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743A5250CF5B6009C0E4E /* Exhibition+CoreDataProperties.swift */; };
-		3AE743A9250CFA5C009C0E4E /* CurrentExhibitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743A8250CFA5C009C0E4E /* CurrentExhibitionTableViewController.swift */; };
 		3AE743AB250D1D5C009C0E4E /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743AA250D1D5C009C0E4E /* LocationAnnotation.swift */; };
 		3AE743AD250D1DD8009C0E4E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743AC250D1DD8009C0E4E /* MapViewController.swift */; };
 		3AE743AF250D1E9E009C0E4E /* AllExhibitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE743AE250D1E9E009C0E4E /* AllExhibitionTableViewController.swift */; };
@@ -34,10 +33,9 @@
 		3AF01A02250E72E0009E747F /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A01250E72E0009E747F /* EditPlantViewController.swift */; };
 		3AF01A042510A56F009E747F /* AddExhibitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */; };
 		3AF01A062510C45A009E747F /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A052510C45A009E747F /* Plant.swift */; };
-		3AF01A0D2510D5D4009E747F /* ImageFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A0C2510D5D4009E747F /* ImageFetching.swift */; };
-		3AF01A102510DB2B009E747F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A0F2510DB2B009E747F /* Extensions.swift */; };
 		3AF01A122510E060009E747F /* PlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A112510E060009E747F /* PlantTableViewCell.swift */; };
-		3AF01A152511292D009E747F /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A142511292D009E747F /* ImageCache.swift */; };
+		3AF01A19251252F4009E747F /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A18251252F4009E747F /* ResizeImage.swift */; };
+		3AF01A1B25125ECC009E747F /* CurrentPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +58,6 @@
 		3AE743A2250CEE83009C0E4E /* SearchPlantsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlantsTableViewController.swift; sourceTree = "<group>"; };
 		3AE743A4250CF5B6009C0E4E /* Exhibition+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exhibition+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		3AE743A5250CF5B6009C0E4E /* Exhibition+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exhibition+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		3AE743A8250CFA5C009C0E4E /* CurrentExhibitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExhibitionTableViewController.swift; sourceTree = "<group>"; };
 		3AE743AA250D1D5C009C0E4E /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 		3AE743AC250D1DD8009C0E4E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3AE743AE250D1E9E009C0E4E /* AllExhibitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllExhibitionTableViewController.swift; sourceTree = "<group>"; };
@@ -71,10 +68,9 @@
 		3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExhibitionDelegate.swift; sourceTree = "<group>"; };
 		3AF01A052510C45A009E747F /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
 		3AF01A0A2510CDD5009E747F /* icons8-tree-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-tree-64.png"; sourceTree = "<group>"; };
-		3AF01A0C2510D5D4009E747F /* ImageFetching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetching.swift; sourceTree = "<group>"; };
-		3AF01A0F2510DB2B009E747F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3AF01A112510E060009E747F /* PlantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTableViewCell.swift; sourceTree = "<group>"; };
-		3AF01A142511292D009E747F /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		3AF01A18251252F4009E747F /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
+		3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlantViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +103,6 @@
 		3AE74378250CE88B009C0E4E /* ApiTestWithCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3AF01A132511291C009E747F /* Caching */,
-				3AF01A0E2510DB16009E747F /* Extension */,
-				3AF01A0B2510D5B0009E747F /* Networking */,
-				3AF01A092510CDCC009E747F /* Icon */,
 				3AE7438E250CE8AB009C0E4E /* DataModel */,
 				3AE7438D250CE8A5009C0E4E /* Database */,
 				3AE74379250CE88B009C0E4E /* AppDelegate.swift */,
@@ -124,7 +116,6 @@
 				3AE7439C250CEA15009C0E4E /* SearchResultData.swift */,
 				3AE743A0250CEDE5009C0E4E /* AllPlantsTableViewController.swift */,
 				3AE743A2250CEE83009C0E4E /* SearchPlantsTableViewController.swift */,
-				3AE743A8250CFA5C009C0E4E /* CurrentExhibitionTableViewController.swift */,
 				3AE743AA250D1D5C009C0E4E /* LocationAnnotation.swift */,
 				3AE743AC250D1DD8009C0E4E /* MapViewController.swift */,
 				3AE743AE250D1E9E009C0E4E /* AllExhibitionTableViewController.swift */,
@@ -135,6 +126,8 @@
 				3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */,
 				3AF01A052510C45A009E747F /* Plant.swift */,
 				3AF01A112510E060009E747F /* PlantTableViewCell.swift */,
+				3AF01A18251252F4009E747F /* ResizeImage.swift */,
+				3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */,
 			);
 			path = ApiTestWithCoreData;
 			sourceTree = "<group>";
@@ -159,37 +152,6 @@
 				3AE7438F250CE8BC009C0E4E /* TheGardenExhibition.xcdatamodeld */,
 			);
 			path = DataModel;
-			sourceTree = "<group>";
-		};
-		3AF01A092510CDCC009E747F /* Icon */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Icon;
-			sourceTree = "<group>";
-		};
-		3AF01A0B2510D5B0009E747F /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				3AF01A0C2510D5D4009E747F /* ImageFetching.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		3AF01A0E2510DB16009E747F /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				3AF01A0F2510DB2B009E747F /* Extensions.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
-		3AF01A132511291C009E747F /* Caching */ = {
-			isa = PBXGroup;
-			children = (
-				3AF01A142511292D009E747F /* ImageCache.swift */,
-			);
-			path = Caching;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,7 +225,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE743A9250CFA5C009C0E4E /* CurrentExhibitionTableViewController.swift in Sources */,
 				3AE743B3250E0CA7009C0E4E /* EditExhibitionViewController.swift in Sources */,
 				3AE74395250CE936009C0E4E /* Plant+CoreDataProperties.swift in Sources */,
 				3AE7437A250CE88B009C0E4E /* AppDelegate.swift in Sources */,
@@ -276,21 +237,20 @@
 				3AE743AB250D1D5C009C0E4E /* LocationAnnotation.swift in Sources */,
 				3AE743AF250D1E9E009C0E4E /* AllExhibitionTableViewController.swift in Sources */,
 				3AE7437C250CE88B009C0E4E /* SceneDelegate.swift in Sources */,
+				3AF01A19251252F4009E747F /* ResizeImage.swift in Sources */,
 				3AE743A3250CEE83009C0E4E /* SearchPlantsTableViewController.swift in Sources */,
 				3AF01A062510C45A009E747F /* Plant.swift in Sources */,
 				3AF01A02250E72E0009E747F /* EditPlantViewController.swift in Sources */,
+				3AF01A1B25125ECC009E747F /* CurrentPlantViewController.swift in Sources */,
 				3AE743A6250CF5B6009C0E4E /* Exhibition+CoreDataClass.swift in Sources */,
 				3AF01A00250E30EF009E747F /* CreateExhibitionViewController.swift in Sources */,
 				3AE74394250CE936009C0E4E /* Plant+CoreDataClass.swift in Sources */,
 				3AE743B1250DE527009C0E4E /* CurrentExhibitionViewController.swift in Sources */,
 				3AE74397250CE94B009C0E4E /* MulticastDelegate.swift in Sources */,
 				3AE74399250CE970009C0E4E /* DatabaseProtocol.swift in Sources */,
-				3AF01A102510DB2B009E747F /* Extensions.swift in Sources */,
 				3AE743A7250CF5B6009C0E4E /* Exhibition+CoreDataProperties.swift in Sources */,
 				3AE743A1250CEDE5009C0E4E /* AllPlantsTableViewController.swift in Sources */,
 				3AE743AD250D1DD8009C0E4E /* MapViewController.swift in Sources */,
-				3AF01A152511292D009E747F /* ImageCache.swift in Sources */,
-				3AF01A0D2510D5D4009E747F /* ImageFetching.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
