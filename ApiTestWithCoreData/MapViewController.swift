@@ -15,6 +15,8 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     var allExhibitionList: [Exhibition] = []
     weak var databaseController: DatabaseProtocol?
     
+    let locationManager: CLLocationManager = CLLocationManager()
+    
     var selectedExhibition: Exhibition?
       
     @IBOutlet weak var mapView: MKMapView!
@@ -33,6 +35,9 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         let zoomRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
         
+        locationManager.delegate = self
+        mapView.showsUserLocation = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,11 +53,15 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     // MARK: - MapView functionalities
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-
+        if !(annotation is LocationAnnotation){
+            return nil
+        }
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "LocationAnnotation")
         if annotationView == nil{
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "LocationAnnotation")
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "LocationAnnotation")
             annotationView?.canShowCallout = true
+            annotationView?.image = UIImage(named: "tree")!
 
             let deleteButton = UIButton(type: .custom) as UIButton
             deleteButton.frame.size.width = 44
@@ -68,10 +77,11 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
             annotationView?.leftCalloutAccessoryView = deleteButton
             annotationView?.rightCalloutAccessoryView = infoButton
             
+            
         } else {
             annotationView?.annotation = annotation
         }
-
+        
         return annotationView
     }
     
@@ -134,4 +144,24 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     }
     
 
+}
+
+extension MapViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        mapView.showsUserLocation = true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("LocationFound")
+        let userLocation:CLLocation = locations[0] as CLLocation
+        
+        let userLocationAnnotation = MKPointAnnotation()
+        userLocationAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
+        userLocationAnnotation.title = "You"
+        mapView.addAnnotation(userLocationAnnotation)
+    }
+    
+    func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
+        print("Fail to location user with error: \(error)")
+    }
 }
