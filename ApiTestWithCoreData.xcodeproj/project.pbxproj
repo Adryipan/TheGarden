@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AE14EA5251319650053B4FF /* Species Rose Collection.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA4251319650053B4FF /* Species Rose Collection.gpx */; };
+		3AE14EAA2513196D0053B4FF /* Arid Garden.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA62513196D0053B4FF /* Arid Garden.gpx */; };
+		3AE14EAB2513196D0053B4FF /* Camellia Collection.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA72513196D0053B4FF /* Camellia Collection.gpx */; };
+		3AE14EAC2513196D0053B4FF /* Australian Forest Walk.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA82513196D0053B4FF /* Australian Forest Walk.gpx */; };
+		3AE14EAD2513196D0053B4FF /* Bamboo Collection.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA92513196D0053B4FF /* Bamboo Collection.gpx */; };
+		3AE14EB32513A3540053B4FF /* SortLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE14EB22513A3540053B4FF /* SortLauncher.swift */; };
 		3AE7437A250CE88B009C0E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE74379250CE88B009C0E4E /* AppDelegate.swift */; };
 		3AE7437C250CE88B009C0E4E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7437B250CE88B009C0E4E /* SceneDelegate.swift */; };
 		3AE74381250CE88B009C0E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE7437F250CE88B009C0E4E /* Main.storyboard */; };
@@ -32,14 +38,23 @@
 		3AF01A00250E30EF009E747F /* CreateExhibitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */; };
 		3AF01A02250E72E0009E747F /* EditPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A01250E72E0009E747F /* EditPlantViewController.swift */; };
 		3AF01A042510A56F009E747F /* AddExhibitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */; };
-		3AF01A062510C45A009E747F /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A052510C45A009E747F /* Plant.swift */; };
 		3AF01A122510E060009E747F /* PlantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A112510E060009E747F /* PlantTableViewCell.swift */; };
 		3AF01A19251252F4009E747F /* ResizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A18251252F4009E747F /* ResizeImage.swift */; };
 		3AF01A1B25125ECC009E747F /* CurrentPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */; };
+		3AF0856D2514C03800E28A9B /* SortTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0856C2514C03800E28A9B /* SortTableViewCell.swift */; };
+		3AF0856F2514D39E00E28A9B /* SortDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0856E2514D39E00E28A9B /* SortDelegate.swift */; };
+		3AF085712515049D00E28A9B /* GeoFencingLimitDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF085702515049D00E28A9B /* GeoFencingLimitDelegate.swift */; };
+		3AF085752515088800E28A9B /* DisplayMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF085742515088800E28A9B /* DisplayMessages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3AE14EA3251305780053B4FF /* Royal Botanic Gardens Victoria.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Royal Botanic Gardens Victoria.gpx"; sourceTree = "<group>"; };
+		3AE14EA4251319650053B4FF /* Species Rose Collection.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Species Rose Collection.gpx"; path = "../../../../../../../Downloads/Species Rose Collection.gpx"; sourceTree = "<group>"; };
+		3AE14EA62513196D0053B4FF /* Arid Garden.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Arid Garden.gpx"; path = "../../../../../../../Downloads/Arid Garden.gpx"; sourceTree = "<group>"; };
+		3AE14EA72513196D0053B4FF /* Camellia Collection.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Camellia Collection.gpx"; path = "../../../../../../../Downloads/Camellia Collection.gpx"; sourceTree = "<group>"; };
+		3AE14EA82513196D0053B4FF /* Australian Forest Walk.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Australian Forest Walk.gpx"; path = "../../../../../../../Downloads/Australian Forest Walk.gpx"; sourceTree = "<group>"; };
+		3AE14EA92513196D0053B4FF /* Bamboo Collection.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Bamboo Collection.gpx"; path = "../../../../../../../Downloads/Bamboo Collection.gpx"; sourceTree = "<group>"; };
+		3AE14EB22513A3540053B4FF /* SortLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortLauncher.swift; sourceTree = "<group>"; };
 		3AE74376250CE88B009C0E4E /* ApiTestWithCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApiTestWithCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE74379250CE88B009C0E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AE7437B250CE88B009C0E4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,11 +82,13 @@
 		3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExhibitionViewController.swift; sourceTree = "<group>"; };
 		3AF01A01250E72E0009E747F /* EditPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantViewController.swift; sourceTree = "<group>"; };
 		3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExhibitionDelegate.swift; sourceTree = "<group>"; };
-		3AF01A052510C45A009E747F /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
-		3AF01A0A2510CDD5009E747F /* icons8-tree-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-tree-64.png"; sourceTree = "<group>"; };
 		3AF01A112510E060009E747F /* PlantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTableViewCell.swift; sourceTree = "<group>"; };
 		3AF01A18251252F4009E747F /* ResizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeImage.swift; sourceTree = "<group>"; };
 		3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlantViewController.swift; sourceTree = "<group>"; };
+		3AF0856C2514C03800E28A9B /* SortTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTableViewCell.swift; sourceTree = "<group>"; };
+		3AF0856E2514D39E00E28A9B /* SortDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortDelegate.swift; sourceTree = "<group>"; };
+		3AF085702515049D00E28A9B /* GeoFencingLimitDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFencingLimitDelegate.swift; sourceTree = "<group>"; };
+		3AF085742515088800E28A9B /* DisplayMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMessages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,9 +105,65 @@
 		3AE14EA2251305710053B4FF /* GPX */ = {
 			isa = PBXGroup;
 			children = (
+				3AE14EA62513196D0053B4FF /* Arid Garden.gpx */,
+				3AE14EA82513196D0053B4FF /* Australian Forest Walk.gpx */,
+				3AE14EA92513196D0053B4FF /* Bamboo Collection.gpx */,
+				3AE14EA72513196D0053B4FF /* Camellia Collection.gpx */,
 				3AE14EA3251305780053B4FF /* Royal Botanic Gardens Victoria.gpx */,
+				3AE14EA4251319650053B4FF /* Species Rose Collection.gpx */,
 			);
 			path = GPX;
+			sourceTree = "<group>";
+		};
+		3AE14EAE2513A2D70053B4FF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3AE743A0250CEDE5009C0E4E /* AllPlantsTableViewController.swift */,
+				3AE743A2250CEE83009C0E4E /* SearchPlantsTableViewController.swift */,
+				3AE743AC250D1DD8009C0E4E /* MapViewController.swift */,
+				3AE743AE250D1E9E009C0E4E /* AllExhibitionTableViewController.swift */,
+				3AE743B0250DE527009C0E4E /* CurrentExhibitionViewController.swift */,
+				3AE743B2250E0CA7009C0E4E /* EditExhibitionViewController.swift */,
+				3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */,
+				3AF01A01250E72E0009E747F /* EditPlantViewController.swift */,
+				3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3AE14EAF2513A2F20053B4FF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3AF01A18251252F4009E747F /* ResizeImage.swift */,
+				3AF085742515088800E28A9B /* DisplayMessages.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3AE14EB02513A2FD0053B4FF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3AF01A112510E060009E747F /* PlantTableViewCell.swift */,
+				3AF0856C2514C03800E28A9B /* SortTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3AE14EB12513A3250053B4FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3AE7439A250CE9E5009C0E4E /* PlantData.swift */,
+				3AE7439C250CEA15009C0E4E /* SearchResultData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3AE14EB42513A43D0053B4FF /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				3AE14EB22513A3540053B4FF /* SortLauncher.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		3AE7436D250CE88B009C0E4E = {
@@ -98,7 +171,6 @@
 			children = (
 				3AE14EA2251305710053B4FF /* GPX */,
 				3AE74378250CE88B009C0E4E /* ApiTestWithCoreData */,
-				3AE74377250CE88B009C0E4E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,36 +180,28 @@
 				3AE74376250CE88B009C0E4E /* ApiTestWithCoreData.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		3AE74378250CE88B009C0E4E /* ApiTestWithCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3AF01A1C2512FD8B009E747F /* Annotations */,
-				3AE7438E250CE8AB009C0E4E /* DataModel */,
-				3AE7438D250CE8A5009C0E4E /* Database */,
+				3AE74387250CE88C009C0E4E /* Info.plist */,
 				3AE74379250CE88B009C0E4E /* AppDelegate.swift */,
 				3AE7437B250CE88B009C0E4E /* SceneDelegate.swift */,
-				3AE7437F250CE88B009C0E4E /* Main.storyboard */,
 				3AE74382250CE88C009C0E4E /* Assets.xcassets */,
-				3AF01A0A2510CDD5009E747F /* icons8-tree-64.png */,
+				3AF01A1C2512FD8B009E747F /* Annotations */,
+				3AE14EAE2513A2D70053B4FF /* Controllers */,
+				3AE7438D250CE8A5009C0E4E /* Database */,
+				3AE7438E250CE8AB009C0E4E /* DataModel */,
+				3AF0856B2514C01200E28A9B /* Delegate */,
+				3AE14EAF2513A2F20053B4FF /* Helpers */,
 				3AE74384250CE88C009C0E4E /* LaunchScreen.storyboard */,
-				3AE74387250CE88C009C0E4E /* Info.plist */,
-				3AE7439A250CE9E5009C0E4E /* PlantData.swift */,
-				3AE7439C250CEA15009C0E4E /* SearchResultData.swift */,
-				3AE743A0250CEDE5009C0E4E /* AllPlantsTableViewController.swift */,
-				3AE743A2250CEE83009C0E4E /* SearchPlantsTableViewController.swift */,
-				3AE743AC250D1DD8009C0E4E /* MapViewController.swift */,
-				3AE743AE250D1E9E009C0E4E /* AllExhibitionTableViewController.swift */,
-				3AE743B0250DE527009C0E4E /* CurrentExhibitionViewController.swift */,
-				3AE743B2250E0CA7009C0E4E /* EditExhibitionViewController.swift */,
-				3AF019FF250E30EF009E747F /* CreateExhibitionViewController.swift */,
-				3AF01A01250E72E0009E747F /* EditPlantViewController.swift */,
-				3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */,
-				3AF01A052510C45A009E747F /* Plant.swift */,
-				3AF01A112510E060009E747F /* PlantTableViewCell.swift */,
-				3AF01A18251252F4009E747F /* ResizeImage.swift */,
-				3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */,
+				3AE7437F250CE88B009C0E4E /* Main.storyboard */,
+				3AE14EB12513A3250053B4FF /* Model */,
+				3AE74377250CE88B009C0E4E /* Products */,
+				3AE14EB42513A43D0053B4FF /* SubViews */,
+				3AE14EB02513A2FD0053B4FF /* View */,
 			);
 			path = ApiTestWithCoreData;
 			sourceTree = "<group>";
@@ -170,6 +234,16 @@
 				3AE743AA250D1D5C009C0E4E /* LocationAnnotation.swift */,
 			);
 			path = Annotations;
+			sourceTree = "<group>";
+		};
+		3AF0856B2514C01200E28A9B /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				3AF01A032510A56F009E747F /* AddExhibitionDelegate.swift */,
+				3AF0856E2514D39E00E28A9B /* SortDelegate.swift */,
+				3AF085702515049D00E28A9B /* GeoFencingLimitDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,8 +304,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE14EAB2513196D0053B4FF /* Camellia Collection.gpx in Resources */,
+				3AE14EAC2513196D0053B4FF /* Australian Forest Walk.gpx in Resources */,
 				3AE74386250CE88C009C0E4E /* LaunchScreen.storyboard in Resources */,
+				3AE14EA5251319650053B4FF /* Species Rose Collection.gpx in Resources */,
+				3AE14EAA2513196D0053B4FF /* Arid Garden.gpx in Resources */,
 				3AE74383250CE88C009C0E4E /* Assets.xcassets in Resources */,
+				3AE14EAD2513196D0053B4FF /* Bamboo Collection.gpx in Resources */,
 				3AE74381250CE88B009C0E4E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,8 +322,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE14EB32513A3540053B4FF /* SortLauncher.swift in Sources */,
 				3AE743B3250E0CA7009C0E4E /* EditExhibitionViewController.swift in Sources */,
 				3AE74395250CE936009C0E4E /* Plant+CoreDataProperties.swift in Sources */,
+				3AF0856D2514C03800E28A9B /* SortTableViewCell.swift in Sources */,
 				3AE7437A250CE88B009C0E4E /* AppDelegate.swift in Sources */,
 				3AF01A122510E060009E747F /* PlantTableViewCell.swift in Sources */,
 				3AE7439F250CEA5E009C0E4E /* CoreDataController.swift in Sources */,
@@ -256,12 +337,14 @@
 				3AE743AF250D1E9E009C0E4E /* AllExhibitionTableViewController.swift in Sources */,
 				3AE7437C250CE88B009C0E4E /* SceneDelegate.swift in Sources */,
 				3AF01A19251252F4009E747F /* ResizeImage.swift in Sources */,
+				3AF085712515049D00E28A9B /* GeoFencingLimitDelegate.swift in Sources */,
 				3AE743A3250CEE83009C0E4E /* SearchPlantsTableViewController.swift in Sources */,
-				3AF01A062510C45A009E747F /* Plant.swift in Sources */,
 				3AF01A02250E72E0009E747F /* EditPlantViewController.swift in Sources */,
 				3AF01A1B25125ECC009E747F /* CurrentPlantViewController.swift in Sources */,
 				3AE743A6250CF5B6009C0E4E /* Exhibition+CoreDataClass.swift in Sources */,
 				3AF01A00250E30EF009E747F /* CreateExhibitionViewController.swift in Sources */,
+				3AF0856F2514D39E00E28A9B /* SortDelegate.swift in Sources */,
+				3AF085752515088800E28A9B /* DisplayMessages.swift in Sources */,
 				3AE74394250CE936009C0E4E /* Plant+CoreDataClass.swift in Sources */,
 				3AE743B1250DE527009C0E4E /* CurrentExhibitionViewController.swift in Sources */,
 				3AE74397250CE94B009C0E4E /* MulticastDelegate.swift in Sources */,

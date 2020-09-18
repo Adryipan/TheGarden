@@ -12,7 +12,6 @@ import UIKit
 
 class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsControllerDelegate{
 
-    
 
     var listeners = MulticastDelegate<DatabaseListener>()
     var persistantContainer: NSPersistentContainer
@@ -101,12 +100,12 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
             exhibition = (exhibitionFetchedResultsController.fetchedObjects)!
             if exhibition.count > 0{
                 removeExhibition(exhibition: exhibition[0])
-                let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
+                let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0, isTracking: false)
             } else {
-                let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
+                let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0, isTracking: false)
             }
          } else{
-            let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0)
+            let _ = addExhibition(name: "Temp", desc: "", lat: 0, long: 0, isTracking: false)
         }
 
     }
@@ -178,6 +177,14 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         exhibition.setValue(newDesc, forKey: "desc")
     }
     
+    func addExhibitionTracking(exhibition: Exhibition) {
+        exhibition.setValue(true, forKey: "isTracking")
+    }
+    
+    func removeExhibitionTracking(exhibition: Exhibition) {
+        exhibition.setValue(false, forKey: "isTracking")
+    }
+    
     func addPlant(plantData: PlantData, image: Data) -> Plant {
         let plant = NSEntityDescription.insertNewObject(forEntityName: "Plant", into: persistantContainer.viewContext) as! Plant
         plant.commonName = plantData.commonName
@@ -190,13 +197,13 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return plant
     }
     
-    func addExhibition(name: String, desc: String, lat: Double, long: Double) -> Exhibition{
+    func addExhibition(name: String, desc: String, lat: Double, long: Double, isTracking: Bool) -> Exhibition{
         let exhibition = NSEntityDescription.insertNewObject(forEntityName: "Exhibition", into: persistantContainer.viewContext) as! Exhibition
         exhibition.name = name
         exhibition.desc = desc
         exhibition.lat = lat
         exhibition.long = long
-        
+        exhibition.isTracking = isTracking
         return exhibition
     }
     
@@ -384,7 +391,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     
     // MARK: - Default Exhibition
     func createDefaultExhibition(){
-        let roseExhibition = addExhibition(name: "Species Rose Collection", desc: "Showing more than 100 variety of roses.", lat: -37.830644, long: 144.983362)
+        let roseExhibition = addExhibition(name: "Species Rose Collection", desc: "Showing more than 100 variety of roses.", lat: -37.830644, long: 144.983362, isTracking: true)
         var image = ResizeImage.resizeImage(image: UIImage(named: "yellow rose")!, width: 60, height: 60)
         let rose1 = addPlant(commonName: "yellow rose", scientificName: "Rosa xanthina", image_url: "    https://bs.floristic.org/image/o/6416eb252e4e3d359aa298647c1568ed8ad03b90", family: "Rosaceae", year: 1820, image: image.pngData()!)
         image = ResizeImage.resizeImage(image: UIImage(named: "chinese rose")!, width: 60, height:60)
@@ -395,7 +402,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         roseExhibition.addToPlants([rose1, rose2, rose3])
 
         
-        let aridExhibition = addExhibition(name: "Arid Garden", desc: "Displaying assortment of aloes, bromeliads, agaves and cati.", lat: -37.831760, long: 144.983095)
+        let aridExhibition = addExhibition(name: "Arid Garden", desc: "Displaying assortment of aloes, bromeliads, agaves and cati.", lat: -37.831760, long: 144.983095, isTracking: true)
         image = ResizeImage.resizeImage(image: UIImage(named: "joshua-tree")!, width: 60, height: 60)
         let arid1 = addPlant(commonName: "Joshua-tree", scientificName: "Yucca brevifolia", image_url: "https://bs.floristic.org/image/o/25ffeb64175cf2540206a817d4ec8fcc55496a7b", family: "Asparagaceae", year: 1871, image: image.pngData()!)
         image = ResizeImage.resizeImage(image: UIImage(named: "Tree euphorbia")!, width: 60, height: 60)
@@ -405,7 +412,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         
         aridExhibition.addToPlants([arid1, arid2, arid3])
         
-        let forestExhibition = addExhibition(name: "Australian Forest Walk", desc: "Showing a range of Australian forest species.", lat: -37.831333, long: 144.977588)
+        let forestExhibition = addExhibition(name: "Australian Forest Walk", desc: "Showing a range of Australian forest species.", lat: -37.831333, long: 144.977588, isTracking: true)
         image = ResizeImage.resizeImage(image: UIImage(named: "Blue oliveberry")!, width: 60, height: 60)
         let forest1 = addPlant(commonName: "Blue oliveberry", scientificName: "Elaeocarpus reticulatus", image_url: "https://bs.floristic.org/image/o/0857436b7baf0081d7c331168398da4dc5667430", family: "Elaeocarpaceae", year: 1809, image: image.pngData()!)
         image = ResizeImage.resizeImage(image: UIImage(named: "Saw Banksia")!, width: 60, height: 60)
@@ -415,7 +422,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         
         forestExhibition.addToPlants([forest1, forest2, forest3])
         
-        let bambooExhibition = addExhibition(name: "Bamboo Collection", desc: "Taxonomic and Evolutionary collection of Bamboo.", lat: -37.830422, long: 144.980248)
+        let bambooExhibition = addExhibition(name: "Bamboo Collection", desc: "Taxonomic and Evolutionary collection of Bamboo.", lat: -37.830422, long: 144.980248, isTracking: true)
         image = ResizeImage.resizeImage(image: UIImage(named: "black bamboo")!, width: 60, height: 60)
         let bamboo1 = addPlant(commonName: "black bamboo", scientificName: "Phyllostachys nigra", image_url: "https://bs.floristic.org/image/o/45e7e42c5f9b0a9ec324b9fba3abf970bcfe8ded", family: "Poaceae", year: 1868, image: image.pngData()!)
         image = ResizeImage.resizeImage(image: UIImage(named: "sacred bamboo")!, width: 60, height: 60)
@@ -426,7 +433,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         bambooExhibition.addToPlants([bamboo1, bamboo2, bamboo3])
         
         
-        let camelliaCollection = addExhibition(name: "Camellia Collection", desc: "A breathtaking best exhibition in winter.", lat: -37.830997, long: 144.979243)
+        let camelliaCollection = addExhibition(name: "Camellia Collection", desc: "A breathtaking best exhibition in winter.", lat: -37.830997, long: 144.979243, isTracking: true)
         image = ResizeImage.resizeImage(image: UIImage(named: "yellow camellia")!, width: 60, height: 60)
         let camellia1 = addPlant(commonName: "Yellow camellia", scientificName: "Camellia petelotii", image_url: "https://bs.floristic.org/image/o/e8f2b963c47a310a19366dcb473efc27e0d22ea8", family: "Theaceae", year: 1949, image: image.pngData()!)
         image = ResizeImage.resizeImage(image: UIImage(named: "camellia")!, width: 60, height: 60)

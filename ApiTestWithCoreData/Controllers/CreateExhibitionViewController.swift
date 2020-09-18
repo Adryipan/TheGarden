@@ -44,6 +44,7 @@ class CreateExhibitionViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         mapView.delegate = self
+        //Ref:
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         mapView.addGestureRecognizer(longPressGesture)
         // Focus on Royal botanic garden
@@ -69,6 +70,7 @@ class CreateExhibitionViewController: UIViewController {
     }
     
     // MARK: - Register gesture and add annotation on map
+    // Ref:
     @objc func longPress(sender: UIGestureRecognizer){
         if sender.state == .began{
             // Get the location on the view
@@ -97,7 +99,7 @@ class CreateExhibitionViewController: UIViewController {
             let name = nameTextField.text!
             let description = descriptionTextField.text!
             
-            let newExhibition = databaseController?.addExhibition(name: name, desc: description, lat: lat!, long: long!)
+            let newExhibition = databaseController?.addExhibition(name: name, desc: description, lat: lat!, long: long!, isTracking: false)
             
             for thisPlant in addedPlantList{
                 newExhibition?.addToPlants(thisPlant)
@@ -121,25 +123,8 @@ class CreateExhibitionViewController: UIViewController {
             errorMsg += "- Please add 3 or more plants"
         }
         
-        displayMessage(title: "Please provide more details", message: errorMsg)
+        DisplayMessages.displayAlert(title: "Please provide more details", message: errorMsg)
     }
-    
-    func displayMessage(title: String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

@@ -64,7 +64,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
+    
+    func generateAlert(title: String, message: String) -> UIAlertController{
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        return alertController
+    }
+    
 
 }
 
@@ -73,13 +79,21 @@ extension SceneDelegate: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if UIApplication.shared.applicationState == .active{
             // Show a popup on screen
+            DisplayMessages.displayAlert(title: "Entering \(region.identifier)", message: "")
         }else{
-            // Send up notification in stead
+            // Send a notification instead
+            DisplayMessages.displayLocalNotification(body: "Welcome To \(region.identifier)", identifier: "Enter")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        print("Exit")
+        if UIApplication.shared.applicationState == .active{
+            // Show a popup on screen
+            DisplayMessages.displayAlert(title: "Exiting \(region.identifier)", message: "")
+        }else{
+            // Send a notification instead
+            DisplayMessages.displayLocalNotification(body: "Good by from \(region.identifier)", identifier: "Exit")
+        }
     }
 }
 

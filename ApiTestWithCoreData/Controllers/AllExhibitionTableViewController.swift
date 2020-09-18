@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllExhibitionTableViewController: UITableViewController, DatabaseListener {
+class AllExhibitionTableViewController: UITableViewController {
     
     let SECTION_EXHIBITION = 0
     let SECTION_INFO = 1
@@ -29,13 +29,17 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
+        // Setup the Sort button on the nav bar
+        let sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSortMenu))
+        
+        navigationItem.leftBarButtonItem = sortButton
+        
         // Setup the search controller delegate and view
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Plants"
+        searchController.searchBar.placeholder = "Search Exhibition"
         navigationItem.searchController = searchController
-        
         definesPresentationContext = true
         
 
@@ -54,22 +58,11 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         databaseController?.removeListener(listener: self)
     }
     
-    // MARK: - Database listener
-    func onExhibitionPlantListChange(change: DatabaseChange, exhibitionPlants: [Plant]) {
-        // Not called
-    }
-    
-    func onPlantsRecordChange(change: DatabaseChange, plants: [Plant]) {
-        // Not called
-    }
-    
-    func onExhibitionRecordChange(change: DatabaseChange, exhibitions: [Exhibition]) {
-        allExhibitionList = exhibitions
-        tableView.reloadData()
-        for thisExhibition in allExhibitionList{
-            let location = LocationAnnotation(title: thisExhibition.name!, subtitle: thisExhibition.desc!, lat: thisExhibition.lat, long: thisExhibition.long)
-            mapViewController?.mapView.addAnnotation(location)
-        }
+    // Show the sort option menu
+    let sortLauncher = SortLauncher()
+    @objc func showSortMenu(){
+        sortLauncher.sortItemDelegate = self
+        sortLauncher.showSortMenu()
     }
     
     // MARK: - Table view data source
@@ -95,7 +88,7 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         if indexPath.section == SECTION_EXHIBITION{
             let exhibitionCell = tableView.dequeueReusableCell(withIdentifier: CELL_EXHIBITION, for: indexPath)
             
-            let exhibition = allExhibitionList[indexPath.row]
+            let exhibition = filteredExhibitionList[indexPath.row]
             
             exhibitionCell.textLabel?.text = exhibition.name
             exhibitionCell.detailTextLabel?.text = exhibition.desc
@@ -107,8 +100,8 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         
         cell.textLabel?.textColor = .secondaryLabel
         cell.selectionStyle = .none
-        if allExhibitionList.count > 0{
-            cell.textLabel?.text = "\(allExhibitionList.count) exhibitions saved"
+        if filteredExhibitionList.count > 0{
+            cell.textLabel?.text = "\(filteredExhibitionList.count) exhibitions saved"
         }else{
             cell.textLabel?.text = "No exhibition saved"
         }
@@ -116,7 +109,7 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedExhibition = allExhibitionList[indexPath.row]
+        let selectedExhibition = filteredExhibitionList[indexPath.row]
         let location = LocationAnnotation(title: selectedExhibition.name!, subtitle: selectedExhibition.desc!, lat: selectedExhibition.lat, long: selectedExhibition.long)
         mapViewController?.focusOn(annotation: location)
         if let mapVC = mapViewController{
@@ -124,31 +117,6 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
         }
         
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
@@ -162,6 +130,29 @@ class AllExhibitionTableViewController: UITableViewController, DatabaseListener 
 
 }
 
+// MARK: - Database listener
+extension AllExhibitionTableViewController: DatabaseListener{
+
+    func onExhibitionPlantListChange(change: DatabaseChange, exhibitionPlants: [Plant]) {
+        // Not called
+    }
+    
+    func onPlantsRecordChange(change: DatabaseChange, plants: [Plant]) {
+        // Not called
+    }
+    
+    func onExhibitionRecordChange(change: DatabaseChange, exhibitions: [Exhibition]) {
+        allExhibitionList = exhibitions
+        filteredExhibitionList = allExhibitionList
+        tableView.reloadData()
+        for thisExhibition in allExhibitionList{
+            let location = LocationAnnotation(title: thisExhibition.name!, subtitle: thisExhibition.desc!, lat: thisExhibition.lat, long: thisExhibition.long)
+            mapViewController?.mapView.addAnnotation(location)
+        }
+    }
+}
+
+// MARK: - Add exhibition delegate
 extension AllExhibitionTableViewController: AddExhibitionDelegate{
     func addExhibitionDelegate(newExhibition: Exhibition) -> Bool {
         
@@ -205,5 +196,29 @@ extension AllExhibitionTableViewController: UISearchResultsUpdating{
         
         tableView.reloadData()
     }
+    
+}
+
+// MARK: - Sort Exhibition Delegate
+extension AllExhibitionTableViewController: SortDelegate{
+    func sortExhibitionDelegate(actionCode: Int) {
+        // Sort the array base on the response
+        // 0: Ascending and 1: Descending
+        switch actionCode {
+        case 0:
+            filteredExhibitionList = filteredExhibitionList.sorted{
+                return $0.name! < $1.name!
+            }
+            tableView.reloadData()
+        case 1:
+            filteredExhibitionList = filteredExhibitionList.sorted{
+                return $0.name! > $1.name!
+            }
+            tableView.reloadData()
+        default:
+            filteredExhibitionList = allExhibitionList
+        }
+    }
+    
     
 }

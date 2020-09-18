@@ -18,6 +18,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     let locationManager: CLLocationManager = CLLocationManager()
     
     var selectedExhibition: Exhibition?
+    var geoFencingCount = 0
       
     @IBOutlet weak var mapView: MKMapView!
     
@@ -50,6 +51,41 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         databaseController?.removeListener(listener: self)
     }
     
+    // MARK: - Geofencing
+    func region(with location: LocationAnnotation) -> CLCircularRegion{
+        let region = CLCircularRegion(center: location.coordinate, radius: 10, identifier: location.title!)
+        
+        region.notifyOnExit = true
+        region.notifyOnExit = true
+        
+        return region
+    }
+    
+    func startMonitor(location: LocationAnnotation){
+        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
+            displayMessage(title: "Geofencing failure", message: "This device does nto support Geofencing.")
+        }
+        
+        if CLLocationManager.authorizationStatus() != .authorizedAlways{
+            displayMessage(title: "Location Permission warning", message: "Please allow the application to always access location information for Geofencing function.")
+        }
+        
+        let fence = region(with: location)
+        locationManager.startMonitoring(for: fence)
+        geoFencingCount += 1
+    }
+    
+    func stopMonitor(location: LocationAnnotation) {
+        for region in locationManager.monitoredRegions{
+            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == location.title else{
+                continue
+            }
+            locationManager.stopMonitoring(for: circularRegion)
+            geoFencingCount -= 1
+        }
+    }
+    
+    
     // MARK: - MapView functionalities
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -57,11 +93,12 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
             return nil
         }
         
+        //Ref:
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "LocationAnnotation")
         if annotationView == nil{
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "LocationAnnotation")
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "LocationAnnotation")
             annotationView?.canShowCallout = true
-            annotationView?.image = UIImage(named: "tree")!
+//            annotationView?.image = UIImage(named: "tree")!
 
             let deleteButton = UIButton(type: .custom) as UIButton
             deleteButton.frame.size.width = 44
@@ -94,6 +131,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
             performSegue(withIdentifier: "viewExhibitionSegue", sender: nil)
         } else {
             // The delete button is clicked and remove the exhibition
+            stopMonitor(location: view.annotation as! LocationAnnotation)
             selectedExhibition = databaseController?.getExhibition(name: (view.annotation?.title)!!)
             databaseController?.removeExhibition(exhibition: selectedExhibition!)
         }
@@ -102,7 +140,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     func focusOn(annotation: MKAnnotation){
         mapView.selectAnnotation(annotation, animated: true)
         
-        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 400, longitudinalMeters: 400)
+        let zoomRegion = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
         
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
     }
@@ -121,13 +159,19 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         allExhibitionList = exhibitions
         mapView.removeAnnotations(mapView.annotations)
         for thisExhibition in allExhibitionList{
-            addExhibitionAnnotation(exhibition: thisExhibition)
+            let location = addExhibitionAnnotation(exhibition: thisExhibition)
+            stopMonitor(location: location)
+            if thisExhibition.isTracking{
+                startMonitor(location: location)
+            }
         }
+        
     }
     
-    private func addExhibitionAnnotation(exhibition: Exhibition){
+    private func addExhibitionAnnotation(exhibition: Exhibition) -> LocationAnnotation{
         let location = LocationAnnotation(title: exhibition.name!, subtitle: exhibition.desc!, lat: exhibition.lat, long: exhibition.long)
         mapView.addAnnotation(location)
+        return location
     }
     
     
@@ -140,7 +184,14 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         if segue.identifier == "viewExhibitionSegue"{
             let destination = segue.destination as! CurrentExhibitionViewController
             destination.currentExhibition = selectedExhibition
+            destination.addGeoFenceDelegate = self
         }
+    }
+    
+    func displayMessage(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
 
@@ -152,7 +203,6 @@ extension MapViewController: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("LocationFound")
         let userLocation:CLLocation = locations[0] as CLLocation
         
         let userLocationAnnotation = MKPointAnnotation()
@@ -163,5 +213,12 @@ extension MapViewController: CLLocationManagerDelegate{
     
     func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
         print("Fail to location user with error: \(error)")
+    }
+}
+
+
+extension MapViewController: GeoFencingLimitDelegate{
+    func geoFencingLimitDelegate() -> Bool {
+        return geoFencingCount + 1 <= 20
     }
 }
