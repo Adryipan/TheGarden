@@ -32,7 +32,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         // Focus on Royal botanic garden
-        let location = LocationAnnotation(title: "Royal Botanic Gardens Victoria", subtitle: "", lat: -37.830184, long: 144.979640)
+        let location = LocationAnnotation(title: "Royal Botanic Gardens Victoria", subtitle: "", lat: -37.830184, long: 144.979640, image_url: "")
         let zoomRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
         
@@ -63,11 +63,11 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     
     func startMonitor(location: LocationAnnotation){
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
-            displayMessage(title: "Geofencing failure", message: "This device does nto support Geofencing.")
+            DisplayMessages.displayAlert(title: "Geofencing failure", message: "This device does nto support Geofencing.")
         }
         
         if CLLocationManager.authorizationStatus() != .authorizedAlways{
-            displayMessage(title: "Location Permission warning", message: "Please allow the application to always access location information for Geofencing function.")
+            DisplayMessages.displayAlert(title: "Location Permission warning", message: "Please allow the application to always access location information for Geofencing function.")
         }
         
         let fence = region(with: location)
@@ -93,12 +93,22 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
             return nil
         }
         
-        //Ref:
+        // Ref: https://developer.apple.com/documentation/mapkit/mapkit_annotations/annotating_a_map_with_custom_data
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "LocationAnnotation")
         if annotationView == nil{
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "LocationAnnotation")
             annotationView?.canShowCallout = true
+            let annotation = annotation as! LocationAnnotation
+            
+            // Add the location image to the annotation
+            let locationImage = UIImageView()
+            locationImage.frame.size.width = 44
+            locationImage.frame.size.height = 44
+            locationImage.loadIcon(urlString: annotation.image_url ?? "")
+            
+            annotationView?.leftCalloutAccessoryView = locationImage
 
+            // Add the dele button to the annotation
             let deleteButton = UIButton(type: .custom) as UIButton
             deleteButton.frame.size.width = 44
             deleteButton.frame.size.height = 44
@@ -108,11 +118,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
             deleteButton.setImage(tintedImage, for: .normal)
             deleteButton.tintColor = .white
             
-            let infoButton = UIButton(type: .detailDisclosure)
-
-            annotationView?.leftCalloutAccessoryView = deleteButton
-            annotationView?.rightCalloutAccessoryView = infoButton
-            
+            annotationView?.rightCalloutAccessoryView = deleteButton
             
         } else {
             annotationView?.annotation = annotation
@@ -121,14 +127,28 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         return annotationView
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let clickedBtn = control as! UIButton
-        
-        if clickedBtn.buttonType == .detailDisclosure{
+    // Ref: https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/handling_uikit_gestures/handling_tap_gestures
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let gestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(tapRecogniser(sender:)))
+        view.addGestureRecognizer(gestureRecogniser)
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        view.removeGestureRecognizer(view.gestureRecognizers!.first!)
+    }
+    
+    @objc func tapRecogniser(sender: UITapGestureRecognizer){
+        if let view = sender.view as? MKAnnotationView{
             // Perform segue to the exhibition detail screen
             selectedExhibition = databaseController?.getExhibition(name: (view.annotation?.title)!!)
             performSegue(withIdentifier: "viewExhibitionSegue", sender: nil)
-        } else {
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let clickedBtn = control as! UIButton
+        
+        if clickedBtn.buttonType == .custom {
             // The delete button is clicked and remove the exhibition
             stopMonitor(location: view.annotation as! LocationAnnotation)
             selectedExhibition = databaseController?.getExhibition(name: (view.annotation?.title)!!)
@@ -168,7 +188,7 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
     }
     
     private func addExhibitionAnnotation(exhibition: Exhibition) -> LocationAnnotation{
-        let location = LocationAnnotation(title: exhibition.name!, subtitle: exhibition.desc!, lat: exhibition.lat, long: exhibition.long)
+        let location = LocationAnnotation(title: exhibition.name!, subtitle: exhibition.desc!, lat: exhibition.lat, long: exhibition.long, image_url: exhibition.image_url ?? "")
         mapView.addAnnotation(location)
         return location
     }
@@ -186,13 +206,6 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
             destination.addGeoFenceDelegate = self
         }
     }
-    
-    func displayMessage(title: String, message: String){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
 
 }
 

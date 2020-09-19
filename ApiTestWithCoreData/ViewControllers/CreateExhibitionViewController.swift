@@ -48,7 +48,7 @@ class CreateExhibitionViewController: UIViewController {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         mapView.addGestureRecognizer(longPressGesture)
         // Focus on Royal botanic garden
-        let location = LocationAnnotation(title: "Royal Botanic Gardens Victoria", subtitle: "", lat: -37.830184, long: 144.979640)
+        let location = LocationAnnotation(title: "Royal Botanic Gardens Victoria", subtitle: "", lat: -37.830184, long: 144.979640, image_url: "")
         let zoomRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
         
@@ -99,7 +99,7 @@ class CreateExhibitionViewController: UIViewController {
             let name = nameTextField.text!
             let description = descriptionTextField.text!
             
-            let newExhibition = databaseController?.addExhibition(name: name, desc: description, lat: lat!, long: long!, isTracking: false)
+            let newExhibition = databaseController?.addExhibition(name: name, desc: description, lat: lat!, long: long!, isTracking: false, image_url: "https://cdn.pixabay.com/photo/2017/05/06/14/13/pathway-2289978_150.jpg")
             
             for thisPlant in addedPlantList{
                 newExhibition?.addToPlants(thisPlant)

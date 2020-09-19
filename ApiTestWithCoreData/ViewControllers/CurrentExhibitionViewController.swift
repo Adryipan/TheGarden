@@ -18,6 +18,7 @@ class CurrentExhibitionViewController: UIViewController{
     var currentExhibition: Exhibition!
     var selectedPlant: Plant?
     
+    @IBOutlet weak var exhibitionImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -57,7 +58,7 @@ class CurrentExhibitionViewController: UIViewController{
         
         // Setup the map delegate and add annotation
         mapView.delegate = self
-        let location = LocationAnnotation(title: currentExhibition.name!, subtitle: currentExhibition.desc!, lat: currentExhibition.lat, long: currentExhibition.long)
+        let location = LocationAnnotation(title: currentExhibition.name!, subtitle: currentExhibition.desc!, lat: currentExhibition.lat, long: currentExhibition.long, image_url: currentExhibition.image_url ?? "")
         mapView.addAnnotation(location)
         let zoomRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 200, longitudinalMeters: 200)
         mapView.setRegion(mapView.regionThatFits(zoomRegion), animated: true)
@@ -65,7 +66,7 @@ class CurrentExhibitionViewController: UIViewController{
         // Setup the plant list for the plant table view
         addedPlantList = (databaseController?.getExhibitionPlants(exhibitionName: currentExhibition.name!))! as [Plant]
         
-        
+        exhibitionImageView.loadIcon(urlString: currentExhibition.image_url!)
         nameLabel.text = currentExhibition?.name
         descriptionLabel.text = currentExhibition?.desc
         
@@ -177,7 +178,7 @@ extension CurrentExhibitionViewController: UITableViewDelegate, UITableViewDataS
         
         addedPlantCell.commonNameLabel.text = addedPlant.commonName
         addedPlantCell.scienceNameLabel?.text = addedPlant.scientificName
-        addedPlantCell.imageView?.image = UIImage(data: addedPlant.image!)
+        addedPlantCell.plantImageView.loadIcon(urlString: addedPlant.image_url ?? "")
         
         
         return addedPlantCell

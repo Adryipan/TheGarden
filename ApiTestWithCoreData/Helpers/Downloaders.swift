@@ -4,7 +4,7 @@
 //
 //  Created by Adrian Yip on 19/9/20.
 //  Copyright © 2020 Monash University. All rights reserved.
-//
+//  Ref: https://github.com/ioslovers/MyNewsApp for demonstrating the idea to simplify the code
 
 import UIKit
 

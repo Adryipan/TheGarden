@@ -25,7 +25,7 @@ class CurrentPlantViewController: UIViewController {
         
 
      //   currentPlant = databaseController?.getPlant(name: currentPlant.commonName!)
-        imageView.image = UIImage(data: currentPlant.image!)
+        imageView.loadIcon(urlString: currentPlant.image_url ?? "")
         commonNameLabel.text = currentPlant.commonName?.uppercased()
         scienceNameLabel.text = currentPlant.scientificName
         yearLabel.text = "Discovered in year \(currentPlant.year!)"

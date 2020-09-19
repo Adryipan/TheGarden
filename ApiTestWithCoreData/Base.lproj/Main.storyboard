@@ -267,6 +267,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="0SJ-Hf-tYx" id="3XH-Do-OWi"/>
                         <outlet property="distanceLabel" destination="7nW-vG-LNB" id="JKI-O4-o8q"/>
+                        <outlet property="exhibitionImageView" destination="lQI-qf-qET" id="Fz4-a5-oUd"/>
                         <outlet property="mapView" destination="7Y9-rH-WjC" id="iGF-JA-KhA"/>
                         <outlet property="nameLabel" destination="d4z-JY-COd" id="stj-xT-ZMI"/>
                         <outlet property="plantTableView" destination="N73-6R-K76" id="6b2-bW-JDa"/>

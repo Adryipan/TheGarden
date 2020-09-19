@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A78750A25159EC300CB12BE /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78750825159EC300CB12BE /* ImageData.swift */; };
+		3A674EBC251628F500F06284 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A674EBB251628F500F06284 /* ImageData.swift */; };
 		3A78750B25159EC300CB12BE /* ImageSearchResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78750925159EC300CB12BE /* ImageSearchResultData.swift */; };
 		3A7875102515A08500CB12BE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78750F2515A08500CB12BE /* Extensions.swift */; };
 		3A7875122515A1C600CB12BE /* Downloaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7875112515A1C600CB12BE /* Downloaders.swift */; };
@@ -53,7 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A78750825159EC300CB12BE /* ImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageData.swift; path = ../../../../../../../../.Trash/ImageData.swift; sourceTree = "<group>"; };
+		3A674EBB251628F500F06284 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 		3A78750925159EC300CB12BE /* ImageSearchResultData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSearchResultData.swift; path = ../../../../../../../../.Trash/ImageSearchResultData.swift; sourceTree = "<group>"; };
 		3A78750F2515A08500CB12BE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3A7875112515A1C600CB12BE /* Downloaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloaders.swift; sourceTree = "<group>"; };
@@ -165,10 +165,10 @@
 		3AE14EB12513A3250053B4FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3A78750825159EC300CB12BE /* ImageData.swift */,
 				3A78750925159EC300CB12BE /* ImageSearchResultData.swift */,
 				3AE7439A250CE9E5009C0E4E /* PlantData.swift */,
 				3AE7439C250CEA15009C0E4E /* SearchResultData.swift */,
+				3A674EBB251628F500F06284 /* ImageData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 				3AE7439B250CE9E5009C0E4E /* PlantData.swift in Sources */,
 				3AF01A042510A56F009E747F /* AddExhibitionDelegate.swift in Sources */,
 				3A7875162515BF5E00CB12BE /* ExhibitionTableViewCell.swift in Sources */,
-				3A78750A25159EC300CB12BE /* ImageData.swift in Sources */,
+				3A674EBC251628F500F06284 /* ImageData.swift in Sources */,
 				3AE7439D250CEA15009C0E4E /* SearchResultData.swift in Sources */,
 				3AE743AB250D1D5C009C0E4E /* LocationAnnotation.swift in Sources */,
 				3AE743AF250D1E9E009C0E4E /* AllExhibitionTableViewController.swift in Sources */,

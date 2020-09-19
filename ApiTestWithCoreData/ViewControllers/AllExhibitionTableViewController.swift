@@ -93,7 +93,7 @@ class AllExhibitionTableViewController: UITableViewController {
             
             let exhibition = filteredExhibitionList[indexPath.row]
             
-            exhibitionCell.exhibitionImageView.loadIcon(urlString: "https://cdn.pixabay.com/photo/2017/05/06/14/13/pathway-2289978_150.jpg")
+            exhibitionCell.exhibitionImageView.loadIcon(urlString: exhibition.image_url ?? "")
             exhibitionCell.nameLabel.text = exhibition.name
             exhibitionCell.descriptionLabel.text = exhibition.desc
             
@@ -114,7 +114,7 @@ class AllExhibitionTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedExhibition = filteredExhibitionList[indexPath.row]
-        let location = LocationAnnotation(title: selectedExhibition.name!, subtitle: selectedExhibition.desc!, lat: selectedExhibition.lat, long: selectedExhibition.long)
+        let location = LocationAnnotation(title: selectedExhibition.name!, subtitle: selectedExhibition.desc!, lat: selectedExhibition.lat, long: selectedExhibition.long, image_url: selectedExhibition.image_url ?? "")
         mapViewController?.focusOn(annotation: location)
         if let mapVC = mapViewController{
             splitViewController?.showDetailViewController(mapVC, sender: nil)
@@ -151,7 +151,7 @@ extension AllExhibitionTableViewController: DatabaseListener{
         filteredExhibitionList = allExhibitionList
         tableView.reloadData()
         for thisExhibition in allExhibitionList{
-            let location = LocationAnnotation(title: thisExhibition.name!, subtitle: thisExhibition.desc!, lat: thisExhibition.lat, long: thisExhibition.long)
+            let location = LocationAnnotation(title: thisExhibition.name!, subtitle: thisExhibition.desc!, lat: thisExhibition.lat, long: thisExhibition.long, image_url: thisExhibition.image_url ?? "")
             mapViewController?.mapView.addAnnotation(location)
         }
     }
