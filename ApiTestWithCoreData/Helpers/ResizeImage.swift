@@ -10,11 +10,10 @@ import UIKit
 
 class ResizeImage: NSObject{
     
-    static func resizeImage(image: UIImage, width: Int, height: Int) -> UIImage{
-        // Resize the image to 60x60 before caching
+    static func resizeImageByViewDimension(image: UIImage, width: CGFloat, height: CGFloat) -> UIImage{
         let size = image.size
-        let widthRatio = CGFloat(width) / size.width
-        let heightRatio = CGFloat(height) / size.height
+        let widthRatio = width / size.width
+        let heightRatio = height / size.height
         
         // Determine the orientation of the image and hence the mode to resize
         var newSize: CGSize

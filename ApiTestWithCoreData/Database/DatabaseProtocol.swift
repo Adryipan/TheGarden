@@ -36,7 +36,7 @@ protocol DatabaseProtocol: AnyObject {
     func configureTemp()
     func updateExhibition(exhibition: Exhibition, newDesc: String)
     func updatePlant(plant: Plant, commonName: String, scienceName: String, year: String, family: String)
-    func addPlant(plantData: PlantData, image: Data) -> Plant
+    func addPlant(plantData: PlantData) -> Plant
     func addExhibition(name: String, desc: String, lat: Double, long: Double, isTracking: Bool) -> Exhibition
     func addPlantToExhibition(plant: Plant, exhibition: Exhibition) -> Bool
     func removeExhibition(exhibition: Exhibition)

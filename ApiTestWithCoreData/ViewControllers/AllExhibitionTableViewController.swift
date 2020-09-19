@@ -15,6 +15,9 @@ class AllExhibitionTableViewController: UITableViewController {
     let CELL_EXHIBITION = "exhibitionCell"
     let CELL_INFO = "exhibitionSizeCell"
     
+    let API_KEY = "18367910-d1d4d4e596c65c27ea5bec894"
+    let REQUEST_STRING = "https://pixabay.com/api/?key="
+    
     var allExhibitionList: [Exhibition] = []
     var filteredExhibitionList: [Exhibition] = []
     weak var databaseController: DatabaseProtocol?
@@ -86,12 +89,13 @@ class AllExhibitionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == SECTION_EXHIBITION{
-            let exhibitionCell = tableView.dequeueReusableCell(withIdentifier: CELL_EXHIBITION, for: indexPath)
+            let exhibitionCell = tableView.dequeueReusableCell(withIdentifier: CELL_EXHIBITION, for: indexPath) as! ExhibitionTableViewCell
             
             let exhibition = filteredExhibitionList[indexPath.row]
             
-            exhibitionCell.textLabel?.text = exhibition.name
-            exhibitionCell.detailTextLabel?.text = exhibition.desc
+            exhibitionCell.exhibitionImageView.loadIcon(urlString: "https://cdn.pixabay.com/photo/2017/05/06/14/13/pathway-2289978_150.jpg")
+            exhibitionCell.nameLabel.text = exhibition.name
+            exhibitionCell.descriptionLabel.text = exhibition.desc
             
             return exhibitionCell
         }
@@ -117,6 +121,7 @@ class AllExhibitionTableViewController: UITableViewController {
         }
         
     }
+    
     
     // MARK: - Navigation
 

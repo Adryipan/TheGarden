@@ -98,7 +98,6 @@ class MapViewController: UIViewController, DatabaseListener, MKMapViewDelegate {
         if annotationView == nil{
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "LocationAnnotation")
             annotationView?.canShowCallout = true
-//            annotationView?.image = UIImage(named: "tree")!
 
             let deleteButton = UIButton(type: .custom) as UIButton
             deleteButton.frame.size.width = 44

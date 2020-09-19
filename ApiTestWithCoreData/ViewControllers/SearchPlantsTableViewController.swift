@@ -19,8 +19,6 @@ class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegat
     var newPlantImage = [UIImage]()
     weak var databaseController: DatabaseProtocol?
     
-    let imageCache = NSCache<AnyObject, AnyObject>()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchController = UISearchController(searchResultsController: nil)
@@ -55,14 +53,13 @@ class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegat
         
         cell.commonNameLabel.text = plant.commonName
         cell.scienceNameLabel.text = plant.scienceName
-        cell.imageView?.image = loadImage(url: plant.image_url ?? "")
+        cell.plantImageView.loadIcon(urlString: plant.image_url ?? "")
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let plant = newPlants[indexPath.row]
-        let imageData = loadImage(url: plant.image_url!)
-        let _ = databaseController?.addPlant(plantData: plant, image: imageData.pngData()!)
+        let _ = databaseController?.addPlant(plantData: plant)
         navigationController?.popViewController(animated: true)
     }
 
@@ -119,58 +116,58 @@ class SearchPlantsTableViewController: UITableViewController, UISearchBarDelegat
         task.resume()
     }
 
-    // Load image from cache or from the internet
-    func loadImage(url: String) -> UIImage{
-        guard let imgURL = URL(string: url) else {
-            return UIImage(named: "tree")!
-        }
-        
-        if let imageInCache = imageCache.object(forKey: url as AnyObject){
-            return imageInCache as! UIImage            
-        }
-        
-        let task = URLSession.shared.dataTask(with: imgURL){(data, response, error) in
-            if let error = error{
-                print(error)
-                return
-            }
-            
-            guard let data = data, error == nil else{
-                return
-            }
-            
-            guard let imageToBeCached = UIImage(data: data)else{
-                return
-            }
-            
-            // Resize the image to 60x60 before caching
-            let size = imageToBeCached.size
-            let widthRatio = 60 / size.width
-            let heightRatio = 60 / size.height
-            
-            // Determine the orientation of the image and hence the mode to resize
-            var newSize: CGSize
-            if(widthRatio > heightRatio){
-                newSize = CGSize(width: size.width * heightRatio, height:size.height * heightRatio)
-            } else {
-                newSize = CGSize(width: size.width * widthRatio, height:size.height * widthRatio)
-            }
-            
-            let rectangle = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-            
-            UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-            imageToBeCached.draw(in: rectangle)
-            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            
-            self.imageCache.setObject(resizedImage!, forKey: url as AnyObject)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        task.resume()
-     
-        return UIImage(named: "tree")!
-    }
+//    // Load image from cache or from the internet
+//    func loadImage(url: String) -> UIImage{
+//        guard let imgURL = URL(string: url) else {
+//            return UIImage(named: "tree")!
+//        }
+//        
+//        if let imageInCache = imageCache.object(forKey: url as AnyObject){
+//            return imageInCache as! UIImage            
+//        }
+//        
+//        let task = URLSession.shared.dataTask(with: imgURL){(data, response, error) in
+//            if let error = error{
+//                print(error)
+//                return
+//            }
+//            
+//            guard let data = data, error == nil else{
+//                return
+//            }
+//            
+//            guard let imageToBeCached = UIImage(data: data)else{
+//                return
+//            }
+//            
+//            // Resize the image to 60x60 before caching
+//            let size = imageToBeCached.size
+//            let widthRatio = 60 / size.width
+//            let heightRatio = 60 / size.height
+//            
+//            // Determine the orientation of the image and hence the mode to resize
+//            var newSize: CGSize
+//            if(widthRatio > heightRatio){
+//                newSize = CGSize(width: size.width * heightRatio, height:size.height * heightRatio)
+//            } else {
+//                newSize = CGSize(width: size.width * widthRatio, height:size.height * widthRatio)
+//            }
+//            
+//            let rectangle = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+//            
+//            UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+//            imageToBeCached.draw(in: rectangle)
+//            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+//            UIGraphicsEndImageContext()
+//            
+//            self.imageCache.setObject(resizedImage!, forKey: url as AnyObject)
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//        task.resume()
+//     
+//        return UIImage(named: "tree")!
+//    }
 }
 

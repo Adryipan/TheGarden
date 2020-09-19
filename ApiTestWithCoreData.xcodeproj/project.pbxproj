@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A78750A25159EC300CB12BE /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78750825159EC300CB12BE /* ImageData.swift */; };
+		3A78750B25159EC300CB12BE /* ImageSearchResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78750925159EC300CB12BE /* ImageSearchResultData.swift */; };
+		3A7875102515A08500CB12BE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78750F2515A08500CB12BE /* Extensions.swift */; };
+		3A7875122515A1C600CB12BE /* Downloaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7875112515A1C600CB12BE /* Downloaders.swift */; };
+		3A7875162515BF5E00CB12BE /* ExhibitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7875152515BF5E00CB12BE /* ExhibitionTableViewCell.swift */; };
 		3AE14EA5251319650053B4FF /* Species Rose Collection.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA4251319650053B4FF /* Species Rose Collection.gpx */; };
 		3AE14EAA2513196D0053B4FF /* Arid Garden.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA62513196D0053B4FF /* Arid Garden.gpx */; };
 		3AE14EAB2513196D0053B4FF /* Camellia Collection.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3AE14EA72513196D0053B4FF /* Camellia Collection.gpx */; };
@@ -48,6 +53,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A78750825159EC300CB12BE /* ImageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageData.swift; path = ../../../../../../../../.Trash/ImageData.swift; sourceTree = "<group>"; };
+		3A78750925159EC300CB12BE /* ImageSearchResultData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSearchResultData.swift; path = ../../../../../../../../.Trash/ImageSearchResultData.swift; sourceTree = "<group>"; };
+		3A78750F2515A08500CB12BE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3A7875112515A1C600CB12BE /* Downloaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloaders.swift; sourceTree = "<group>"; };
+		3A7875152515BF5E00CB12BE /* ExhibitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExhibitionTableViewCell.swift; sourceTree = "<group>"; };
 		3AE14EA3251305780053B4FF /* Royal Botanic Gardens Victoria.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Royal Botanic Gardens Victoria.gpx"; sourceTree = "<group>"; };
 		3AE14EA4251319650053B4FF /* Species Rose Collection.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Species Rose Collection.gpx"; path = "../../../../../../../Downloads/Species Rose Collection.gpx"; sourceTree = "<group>"; };
 		3AE14EA62513196D0053B4FF /* Arid Garden.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Arid Garden.gpx"; path = "../../../../../../../Downloads/Arid Garden.gpx"; sourceTree = "<group>"; };
@@ -115,7 +125,7 @@
 			path = GPX;
 			sourceTree = "<group>";
 		};
-		3AE14EAE2513A2D70053B4FF /* Controllers */ = {
+		3AE14EAE2513A2D70053B4FF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				3AE743A0250CEDE5009C0E4E /* AllPlantsTableViewController.swift */,
@@ -128,7 +138,7 @@
 				3AF01A01250E72E0009E747F /* EditPlantViewController.swift */,
 				3AF01A1A25125ECC009E747F /* CurrentPlantViewController.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		3AE14EAF2513A2F20053B4FF /* Helpers */ = {
@@ -136,6 +146,8 @@
 			children = (
 				3AF01A18251252F4009E747F /* ResizeImage.swift */,
 				3AF085742515088800E28A9B /* DisplayMessages.swift */,
+				3A78750F2515A08500CB12BE /* Extensions.swift */,
+				3A7875112515A1C600CB12BE /* Downloaders.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -145,6 +157,7 @@
 			children = (
 				3AF01A112510E060009E747F /* PlantTableViewCell.swift */,
 				3AF0856C2514C03800E28A9B /* SortTableViewCell.swift */,
+				3A7875152515BF5E00CB12BE /* ExhibitionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -152,6 +165,8 @@
 		3AE14EB12513A3250053B4FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A78750825159EC300CB12BE /* ImageData.swift */,
+				3A78750925159EC300CB12BE /* ImageSearchResultData.swift */,
 				3AE7439A250CE9E5009C0E4E /* PlantData.swift */,
 				3AE7439C250CEA15009C0E4E /* SearchResultData.swift */,
 			);
@@ -191,7 +206,7 @@
 				3AE7437B250CE88B009C0E4E /* SceneDelegate.swift */,
 				3AE74382250CE88C009C0E4E /* Assets.xcassets */,
 				3AF01A1C2512FD8B009E747F /* Annotations */,
-				3AE14EAE2513A2D70053B4FF /* Controllers */,
+				3AE14EAE2513A2D70053B4FF /* ViewControllers */,
 				3AE7438D250CE8A5009C0E4E /* Database */,
 				3AE7438E250CE8AB009C0E4E /* DataModel */,
 				3AF0856B2514C01200E28A9B /* Delegate */,
@@ -324,14 +339,18 @@
 			files = (
 				3AE14EB32513A3540053B4FF /* SortLauncher.swift in Sources */,
 				3AE743B3250E0CA7009C0E4E /* EditExhibitionViewController.swift in Sources */,
+				3A7875122515A1C600CB12BE /* Downloaders.swift in Sources */,
 				3AE74395250CE936009C0E4E /* Plant+CoreDataProperties.swift in Sources */,
 				3AF0856D2514C03800E28A9B /* SortTableViewCell.swift in Sources */,
 				3AE7437A250CE88B009C0E4E /* AppDelegate.swift in Sources */,
 				3AF01A122510E060009E747F /* PlantTableViewCell.swift in Sources */,
 				3AE7439F250CEA5E009C0E4E /* CoreDataController.swift in Sources */,
 				3AE74391250CE8BC009C0E4E /* TheGardenExhibition.xcdatamodeld in Sources */,
+				3A78750B25159EC300CB12BE /* ImageSearchResultData.swift in Sources */,
 				3AE7439B250CE9E5009C0E4E /* PlantData.swift in Sources */,
 				3AF01A042510A56F009E747F /* AddExhibitionDelegate.swift in Sources */,
+				3A7875162515BF5E00CB12BE /* ExhibitionTableViewCell.swift in Sources */,
+				3A78750A25159EC300CB12BE /* ImageData.swift in Sources */,
 				3AE7439D250CEA15009C0E4E /* SearchResultData.swift in Sources */,
 				3AE743AB250D1D5C009C0E4E /* LocationAnnotation.swift in Sources */,
 				3AE743AF250D1E9E009C0E4E /* AllExhibitionTableViewController.swift in Sources */,
@@ -351,6 +370,7 @@
 				3AE74399250CE970009C0E4E /* DatabaseProtocol.swift in Sources */,
 				3AE743A7250CF5B6009C0E4E /* Exhibition+CoreDataProperties.swift in Sources */,
 				3AE743A1250CEDE5009C0E4E /* AllPlantsTableViewController.swift in Sources */,
+				3A7875102515A08500CB12BE /* Extensions.swift in Sources */,
 				3AE743AD250D1DD8009C0E4E /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

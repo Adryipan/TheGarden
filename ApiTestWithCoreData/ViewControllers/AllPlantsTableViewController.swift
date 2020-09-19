@@ -9,8 +9,6 @@
 import UIKit
 
 class AllPlantsTableViewController: UITableViewController{
-
-    
     
     var listenerType: ListenerType = .plants
     
@@ -80,16 +78,13 @@ class AllPlantsTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == SECTION_PLANT{
-             let plantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT,for: indexPath) as! PlantTableViewCell
-                   let plant = filteredPlants[indexPath.row]
-                   
-                   plantCell.commonNameLabel.text = plant.commonName
+            let plantCell = tableView.dequeueReusableCell(withIdentifier: CELL_PLANT,for: indexPath) as! PlantTableViewCell
+            let plant = filteredPlants[indexPath.row]
+           
+            plantCell.commonNameLabel.text = plant.commonName
             plantCell.scienceNameLabel.text = plant.scientificName
-            if plant.image != nil{
-                plantCell.imageView?.image = UIImage(data: plant.image!)
-            } else {
-                plantCell.imageView?.image = UIImage(named: "tree")
-            }
+            plantCell.plantImageView.loadIcon(urlString: plant.image_url ?? "")
+            
             return plantCell
         }
         
